@@ -18,14 +18,27 @@ RUN apt-get update && \
 		vim \
 		less
 
-COPY ./app /opt/app
-
-RUN mkdir /opt/app/pip_cache \
+RUN mkdir -p /opt/app \
+	&& mkdir -p /opt/app/pip_cache \
+	&& mkdir -p /opt/app/vuln_django \
 	&& mkdir -p /app/.profile.d
 
+COPY requirements.txt start-server.sh /opt/app/
+
+COPY vuln_django/ /opt/app/vuln_django/vuln_django
+
+COPY static/ /opt/app/vuln_django/static
+
+COPY templates/ /opt/app/vuln_django/templates
+
+COPY polls/ /opt/app/vuln_django/polls
+
+COPY manage.py /opt/app/vuln_django/
+
+COPY ./nginx.default /etc/nginx/sites-available/default
+
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log \
-    && mv /opt/app/nginx/nginx.default /etc/nginx/sites-available/default
+    && ln -sf /dev/stderr /var/log/nginx/error.log
 
 WORKDIR /opt/app
 
