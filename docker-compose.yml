@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  vulny-django:
+    build: .
+    networks:
+      - scan_net
+
+  # Fire up hawkscan
+  hawkscan:
+    image: stackhawk/hawkscan
+    environment:
+      API_KEY: "${HAWK_API_KEY}"
+      APP_ID: "${APP_ID}"
+      HOST: "${APP_HOST:-http://vulny-django}"
+      ENV: "${APP_ENV:-Develop}"
+    volumes:
+      - type: bind
+        source: .
+        target: /hawk
+    tty: true
+    networks:
+      - scan_net
+    depends_on:
+      - vulny-django
+
+# Make a network to run hawkscan against the app
+networks:
+  scan_net:
