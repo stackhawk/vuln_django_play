@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   base:
-    image: stackhawk/vuln-django
+    image: vuln_django
     container_name: vuln-django
     build:
       dockerfile: Dockerfile
