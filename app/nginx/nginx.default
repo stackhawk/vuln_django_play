@@ -1,7 +1,7 @@
 # nginx.default
 
 server {
-  listen 8020 deferred;
+  listen %SERVER_PORT% deferred;
   server_name _;
 
   location / {
