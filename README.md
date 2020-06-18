@@ -47,4 +47,3 @@ NO!
 ```docker run -it -p 8020:8020 --name vuln_django --rm --network scan_net vuln_django:latest```
 YES!
 ```docker run -it -p 8020:8020 --name vuln-django --rm --network scan_net vuln_django:latest
-
