@@ -3,7 +3,7 @@
 # FROM directive instructing base image to build on
 FROM python:3.7-buster
 
-ARG SERVER_PORT=8082
+ARG SERVER_PORT=8020
 
 ENV DJANGO_SUPERUSER_USERNAME=admin
 ENV DJANGO_SUPERUSER_PASSWORD=adminpassword
