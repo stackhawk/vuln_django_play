@@ -51,3 +51,5 @@ RUN python vuln_django/manage.py createsuperuser --no-input \
 	&& python vuln_django/manage.py seed polls --number=5
 
 STOPSIGNAL SIGTERM
+
+CMD ["/opt/app/start-server.sh"]
